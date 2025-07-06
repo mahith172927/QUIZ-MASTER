@@ -1,6 +1,6 @@
 # 🎓 Quiz Master
 
-A **multi-user, full-stack exam preparation platform** built using **Flask** and **HTML** ,**CSS**. It features role-based access (Admin & Users), real-time quiz management, scoring, scheduling0— all integrated with **FLASK** and **SQLite**.
+A **multi-user, full-stack exam preparation platform** built using **Flask** and **HTML** ,**CSS**. It features role-based access (Admin & Users), real-time quiz management, scoring all integrated with **FLASK** and **SQLite**.
 
 
 
