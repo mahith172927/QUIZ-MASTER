@@ -30,8 +30,8 @@ A **multi-user, full-stack exam preparation platform** built using **Flask** and
 
 
 ### 🎨 Frontend
--HTML For designing
--CSS For Styling
+- HTML For designing
+- CSS For Styling
 - Bootstrap for responsive UI
 
 ---
