@@ -40,7 +40,7 @@ A **multi-user, full-stack exam preparation platform** built using **Flask** and
 
 ### Backend Setup (Flask)
 
-python -m venv venv
-venv\Scripts\activate   # On Windows
-pip install -r requirements.txt
-python app.py
+- python -m venv venv
+- venv\Scripts\activate   # On Windows
+- pip install -r requirements.txt
+- python app.py
