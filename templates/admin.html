@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin Control Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container my-4">
+    <h1 class="text-center text-primary mb-4">Admin Control Panel</h1>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="#">Dashboard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuOptions">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menuOptions">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-info" href="{{ url_for('welcome') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-secondary" href="{{ url_for('logout') }}">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link text-danger" href="{{ url_for('display_users') }}">Users</a></li>
+                    <li class="nav-item"><a class="nav-link text-warning" href="{{ url_for('admin_summary') }}">Summary</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+
+
+    <form action="{{ url_for('search_admin') }}" method="GET" class="mb-3">
+        <div class="input-group">
+            <input type="text" name="search" class="form-control" placeholder="Search chapter or subject" value="{{ request.args.get('search', '') }}">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+
+
+    <h2 class="mt-4">Subjects</h2>
+    <table class="table table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>Code</th>
+                <th>Title</th>
+                <th>Details</th>
+                <th>Manage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for subject in subjects %}
+            <tr>
+                <td>{{ subject.id }}</td>
+                <td>{{ subject.name }}</td>
+                <td>{{ subject.description }}</td>
+                <td>
+                    <a href="{{ url_for('edit_subject', subject_id=subject.id) }}" class="btn btn-outline-primary btn-sm">Edit</a>
+                    <form action="{{ url_for('delete_subject', subject_id=subject.id) }}" method="POST" class="d-inline"
+                          onsubmit="return confirm('Do you really want to remove this subject?');">
+                        <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('add_subject') }}" class="btn btn-success">Create New Subject</a>
+
+    <h2 class="mt-4">Chapters</h2>
+    <table class="table table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>Code</th>
+                <th>Title</th>
+                <th>Info</th>
+                <th>Subject</th>
+                <th>Manage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for chapter in chapters %}
+            <tr>
+                <td>{{ chapter.id }}</td>
+                <td>{{ chapter.name }}</td>
+                <td>{{ chapter.description }}</td>
+                <td>{{ chapter.subject.name }}</td>
+                <td>
+                    <a href="{{ url_for('edit_chapter', chapter_id=chapter.id) }}" class="btn btn-outline-primary btn-sm">Edit</a>
+                    <form action="{{ url_for('delete_chapter', chapter_id=chapter.id) }}" method="POST" class="d-inline"
+                          onsubmit="return confirm('Do you really want to remove this chapter?');">
+                        <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('add_chapter') }}" class="btn btn-success">Create New Chapter</a>
+
+    <h2 class="mt-4">Quizzes</h2>
+    <table class="table table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>Quiz ID</th>
+                <th>Chapter</th>
+                <th>Scheduled On</th>
+                <th>Time (mins)</th>
+                <th>Notes</th>
+                <th>Manage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for quiz in quizzes %}
+            <tr>
+                <td>{{ quiz.id }}</td>
+                <td>{{ quiz.chapter.name }}</td>
+                <td>{{ quiz.date_of_quiz }}</td>
+                <td>{{ quiz.time_duration }}</td>
+                <td>{{ quiz.remarks }}</td>
+                <td>
+                    <a href="{{ url_for('edit_quiz', quiz_id=quiz.id) }}" class="btn btn-outline-primary btn-sm">Edit</a>
+                    <form action="{{ url_for('delete_quiz', quiz_id=quiz.id) }}" method="POST" class="d-inline"
+                          onsubmit="return confirm('Do you really want to remove this quiz?');">
+                        <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('add_quiz') }}" class="btn btn-success">Create New Quiz</a>
+
+    <h2 class="mt-4">Questions</h2>
+    <table class="table table-hover table-bordered">
+        <thead class="table-light">
+            <tr>
+                <th>QID</th>
+                <th>Question</th>
+                <th>Quiz</th>
+                <th>Option A</th>
+                <th>Option B</th>
+                <th>Option C</th>
+                <th>Option D</th>
+                <th>Answer</th>
+                <th>Manage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for question in questions %}
+            <tr>
+                <td>{{ question.id }}</td>
+                <td>{{ question.question_statement }}</td>
+                <td>{{ question.quiz_id }}</td>
+                <td>{{ question.option1 }}</td>
+                <td>{{ question.option2 }}</td>
+                <td>{{ question.option3 }}</td>
+                <td>{{ question.option4 }}</td>
+                <td>{{ question.correct_answer }}</td>
+                <td>
+                    <a href="{{ url_for('edit_question', question_id=question.id) }}" class="btn btn-outline-primary btn-sm">Edit</a>
+                    <form action="{{ url_for('delete_question', question_id=question.id) }}" method="POST" class="d-inline"
+                          onsubmit="return confirm('Do you really want to remove this question?');">
+                        <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('add_question') }}" class="btn btn-success">Create New Question</a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

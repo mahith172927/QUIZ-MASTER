@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;  /* Ensures padding and border don't affect element size */
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+    background-color: #f0f8ff;
+    color: #050505;
+}
+
+.nav-bar {
+    background-color: #267fcd;
+    width: 100%;
+    height: 60px;  /* Increased height for better alignment */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  /* Vertically align items */
+    padding: 0 20px;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: #050505;
+}
+
+a:visited {
+    color: #050505;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.pages-links {
+    transform: translate(0px, 10px);
+    font-size: 20px;
+    color: #050505;
+    font-weight: 500;
+}
+
+.links {
+    display: flex;
+    gap: 30px;
+    align-items: center;  /* Vertically center the navbar items */
+}

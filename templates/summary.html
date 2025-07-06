@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Summary</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+       
+        #scoreChart {
+            max-width: 600px;
+            max-height: 400px;
+        }
+        .container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Quiz Performance Summary</h2>
+        <canvas id="scoreChart"></canvas>
+
+        <br>
+        <a href="{{ url_for('user') }}">
+            <button>Back to Dashboard</button>
+        </a>
+    </div>
+
+    <script>
+      
+        var quizIds = JSON.parse('{{ quiz_ids | tojson | safe }}');  
+        var totalScores = JSON.parse('{{ total_scores | tojson | safe }}');  
+
+        var ctx = document.getElementById('scoreChart').getContext('2d');
+        var scoreChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: quizIds,  
+                datasets: [{
+                    label: 'Total Score',
+                    data: totalScores,  
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,  
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Quiz ID'     
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Total Score'  
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
