@@ -2,7 +2,7 @@
 
 A **multi-user, full-stack exam preparation platform** built using **Flask** and **HTML** ,**CSS**. It features role-based access (Admin & Users), real-time quiz management, scoring, scheduling0— all integrated with **FLASK** and **SQLite**.
 
----
+
 
 ## 📌 Features
 
@@ -10,7 +10,7 @@ A **multi-user, full-stack exam preparation platform** built using **Flask** and
 - Token-based User Registration & Login
 - Choose subjects/chapters and attempt quizzes
 - View scores and quiz history
-- 
+
 
 ### 🛠 Admin (Quiz Master)
 - Predefined admin login (no registration needed)
@@ -27,7 +27,7 @@ A **multi-user, full-stack exam preparation platform** built using **Flask** and
 - Flask 
 - Flask-Security for Authentication and Role-based access
 - SQLite for lightweight database
-- 
+
 
 ### 🎨 Frontend
 -HTML For designing
